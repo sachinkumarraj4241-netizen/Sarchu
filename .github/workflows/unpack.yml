@@ -1,0 +1,33 @@
+name: Extract FUNPLAY Project
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract FUNPLAY ZIP
+        run: |
+          mkdir -p /tmp/funplay
+          unzip -q "FUNPLAY_Android_Release_Project.zip" -d /tmp/funplay
+          rsync -a /tmp/funplay/FUNPLAY/ ./
+
+      - name: Remove ZIP
+        run: |
+          rm -f "FUNPLAY_Android_Release_Project.zip"
+
+      - name: Commit extracted project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Add complete FUNPLAY Android project" || exit 0
+          git push
