@@ -1,0 +1,17 @@
+name: funplay
+description: FUNPLAY - Social, Chat, Games and Community App
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.8.0
+  image_picker: ^1.1.2
+  cached_network_image: ^3.4.1
+
+flutter:
+  uses-material-design: true
